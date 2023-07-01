@@ -6,63 +6,72 @@ class OLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Stack(
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      body: Stack(
         fit: StackFit.expand,
         children: [
           Image.asset(
             'assets/login.jpg',
             fit: BoxFit.cover,
           ),
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  "Log In",
-                  softWrap: true,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30.0,
-                  ),
-                ),
-                const SizedBox(height: 10.0),
-                _textField("Email"),
-                const SizedBox(height: 10.0),
-                _textField("Password"),
-                const SizedBox(height: 10.0),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // login logic
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
+          Center(
+            child: Container(
+              padding: const EdgeInsets.all(16.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text(
+                      "Log In",
+                      softWrap: true,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30.0,
                       ),
                     ),
-                    child: const Text(
-                      "Login",
-                      style: TextStyle(fontSize: 16.0),
+                    const SizedBox(height: 10.0),
+                    _textField("Email"),
+                    const SizedBox(height: 10.0),
+                    _textField("Password"),
+                    const SizedBox(height: 10.0),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // login logic
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                        ),
+                        child: const Text(
+                          "Login",
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 5.0),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const OSignUp()));
+                      },
+                      child: const Text(
+                        "Don't have an account? Sign up",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    const SizedBox(
+                        height: 50.0), // Add extra space at the bottom
+                  ],
                 ),
-                const SizedBox(height: 5.0),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => OSignUp()));
-                  },
-                  child: const Text(
-                    "Don't have an account? Sign up",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ],

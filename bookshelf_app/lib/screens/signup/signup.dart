@@ -6,8 +6,9 @@ class OSignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Stack(
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      body: Stack(
         fit: StackFit.expand,
         children: [
           Image.asset(
@@ -62,7 +63,8 @@ class OSignUp extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => OLogin()),
+                          MaterialPageRoute(
+                              builder: (context) => const OLogin()),
                         );
                       },
                       child: const Text(
@@ -70,6 +72,8 @@ class OSignUp extends StatelessWidget {
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
+                    const SizedBox(
+                        height: 50.0), // Add extra space at the bottom
                   ],
                 ),
               ),
