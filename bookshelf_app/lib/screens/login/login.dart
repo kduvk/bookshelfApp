@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bookshelf_app/screens/signup/signup.dart';
 
 class OLogin extends StatelessWidget {
   const OLogin({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class OLogin extends StatelessWidget {
                       // login logic
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.blue,
+                      backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -53,7 +54,8 @@ class OLogin extends StatelessWidget {
                 const SizedBox(height: 5.0),
                 TextButton(
                   onPressed: () {
-                    // signup logic
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => OSignUp()));
                   },
                   child: const Text(
                     "Don't have an account? Sign up",
@@ -81,17 +83,29 @@ class OLogin extends StatelessWidget {
           ),
         ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-        child: TextField(
-          style: const TextStyle(color: Colors.black),
-          decoration: InputDecoration(
-            labelText: label,
-            labelStyle: const TextStyle(color: Colors.black54),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
+      child: TextFormField(
+        style: const TextStyle(color: Colors.black),
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: const TextStyle(
+            color: Colors.black54,
+            fontSize: 12.0,
           ),
+          floatingLabelBehavior: FloatingLabelBehavior.never,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0),
+            borderSide: BorderSide.none,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0),
+            borderSide: const BorderSide(color: Colors.black12),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0),
+            borderSide: const BorderSide(color: Colors.blue),
+          ),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
         ),
       ),
     );
