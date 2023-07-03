@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:bookshelf_app/screens/signup/signup.dart';
+import 'package:bookshelf_app/screens/home/home.dart';
+import 'package:bookshelf_app/screens/signup/signup.dart'; // Import the sign-up screen widget
+import 'package:bookshelf_app/states/currentUser.dart';
+import 'package:provider/provider.dart';
 
 class OLogin extends StatelessWidget {
   const OLogin({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final currentUser = Provider.of<CurrentUser>(context);
+
+    String email = '';
+    String password = '';
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Stack(
@@ -32,15 +40,34 @@ class OLogin extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 10.0),
-                    _textField("Email"),
+                    _textField("Email", (value) {
+                      email = value;
+                    }),
                     const SizedBox(height: 10.0),
-                    _textField("Password"),
+                    _textField("Password", (value) {
+                      password = value;
+                    }),
                     const SizedBox(height: 10.0),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {
-                          // login logic
+                        onPressed: () async {
+                          if (email != '' && password != '') {
+                            bool success =
+                                await currentUser.loginWithEmailAndPassword(
+                              email,
+                              password,
+                              context,
+                            );
+                            if (success) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => OHome(),
+                                ),
+                              );
+                            }
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
@@ -49,7 +76,7 @@ class OLogin extends StatelessWidget {
                           ),
                         ),
                         child: const Text(
-                          "Login",
+                          "Log In",
                           style: TextStyle(fontSize: 16.0),
                         ),
                       ),
@@ -58,17 +85,21 @@ class OLogin extends StatelessWidget {
                     TextButton(
                       onPressed: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const OSignUp()));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                OSignUp(), // Replace with the actual sign-up screen widget
+                          ),
+                        );
                       },
                       child: const Text(
-                        "Don't have an account? Sign up",
+                        "Don't have an account? Sign Up",
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
                     const SizedBox(
-                        height: 50.0), // Add extra space at the bottom
+                      height: 50.0,
+                    ),
                   ],
                 ),
               ),
@@ -79,7 +110,7 @@ class OLogin extends StatelessWidget {
     );
   }
 
-  Widget _textField(String label) {
+  Widget _textField(String label, void Function(String) onChanged) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -94,6 +125,8 @@ class OLogin extends StatelessWidget {
       ),
       child: TextFormField(
         style: const TextStyle(color: Colors.black),
+        onChanged: onChanged,
+        obscureText: label.contains("Password"),
         decoration: InputDecoration(
           labelText: label,
           labelStyle: const TextStyle(
