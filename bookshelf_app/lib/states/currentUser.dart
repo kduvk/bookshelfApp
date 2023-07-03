@@ -20,7 +20,6 @@ class CurrentUser extends ChangeNotifier {
       notifyListeners();
       return true;
     } catch (e) {
-      // Handle sign-in errors here
       print(e);
       showDialog(
         context: context,
@@ -56,7 +55,6 @@ class CurrentUser extends ChangeNotifier {
       notifyListeners();
       return true;
     } catch (e) {
-      // Handle sign-up errors here
       print(e);
       showDialog(
         context: context,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bookshelf_app/screens/home/home.dart';
-import 'package:bookshelf_app/screens/signup/signup.dart'; // Import the sign-up screen widget
+import 'package:bookshelf_app/screens/signup/signup.dart';
 import 'package:bookshelf_app/states/currentUser.dart';
 import 'package:provider/provider.dart';
 
@@ -87,8 +87,7 @@ class OLogin extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                OSignUp(), // Replace with the actual sign-up screen widget
+                            builder: (context) => OSignUp(),
                           ),
                         );
                       },
